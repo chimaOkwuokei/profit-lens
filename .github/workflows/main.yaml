@@ -53,7 +53,10 @@ jobs:
         run: |
           python app.py &
           sleep 5  # Give the app time to start
-
+          
+      - name: Build Docker Image
+        run: |
+          docker build -t myapp:latest .
 
   deploy-to-render:
     name: Deploy to Render
