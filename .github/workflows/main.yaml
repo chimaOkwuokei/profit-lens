@@ -12,6 +12,13 @@ jobs:
     name: Continuous Integration
     runs-on: ubuntu-latest
     steps:
+      # Run Gunicorn to test the app locally
+      - name: Test Gunicorn Locally
+        run: |
+          gunicorn -b 0.0.0.0:8080 app:app &
+          sleep 5  # Allow the app time to start
+          curl -f http://0.0.0.0:8080 || exit 1
+
       # Checkout the code
       - name: Checkout Code
         uses: actions/checkout@v3
